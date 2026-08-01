@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "generated": "2026-08-01T00:04:06.376Z",
+    "businesses": 3,
+    "products": 3,
+    "slides": 2
+  },
+  "config": {
+    "photoBase": "photos/",
+    "slideMs": 7000
+  },
+  "SLIDES": [
+    {
+      "img": "KOKOPO_Vunamami_hero.jpg",
+      "ind": "Fresh Produce",
+      "biz": "Vunamami Growers Collective",
+      "loc": "Kokopo District"
+    },
+    {
+      "img": "GAZELLE_Toma_01.jpg",
+      "ind": "Tailoring",
+      "biz": "Toma Tailoring Centre",
+      "loc": "Gazelle District"
+    }
+  ],
+  "SMES": [
+    {
+      "id": "vunamamigrowersc",
+      "n": "Vunamami Growers Collective",
+      "d": "Kokopo",
+      "f": "Fresh Produce · Food Crops — Rice & Spices",
+      "c": 1,
+      "about": "Smallholder growers supplying fresh greens and food crops.",
+      "llg": "Bitapaka LLG"
+    },
+    {
+      "id": "tomatailoringcen",
+      "n": "Toma Tailoring Centre",
+      "d": "Gazelle",
+      "f": "Tailoring",
+      "c": 1,
+      "about": "",
+      "llg": ""
+    },
+    {
+      "id": "pomioforestcraft",
+      "n": "Pomio Forest Crafts",
+      "d": "Pomio",
+      "f": "Arts & Crafts",
+      "c": 1,
+      "about": "",
+      "llg": ""
+    }
+  ],
+  "P": [
+    {
+      "n": "Aibika Greens Bundle",
+      "s": "vunamamigrowersc",
+      "p": 12,
+      "c": "produce",
+      "i": "🥬",
+      "b": null,
+      "ph": "KOKOPO_Vunamami_aibika_01.jpg",
+      "u": "per bundle",
+      "about": "Fresh aibika cut the same morning.",
+      "stock": 60,
+      "ship": false,
+      "fresh": true
+    },
+    {
+      "n": "Meri Blouse, Made to Measure",
+      "s": "tomatailoringcen",
+      "p": 95,
+      "c": "tailoring",
+      "i": "🧵",
+      "b": null,
+      "ph": "GAZELLE_Toma_blouse_01.jpg",
+      "u": "each",
+      "about": "",
+      "stock": 8,
+      "ship": true,
+      "fresh": false
+    },
+    {
+      "n": "Handcarved Figure",
+      "s": "pomioforestcraft",
+      "p": 225,
+      "c": "crafts",
+      "i": "🧺",
+      "b": null,
+      "ph": null,
+      "u": "each",
+      "about": "",
+      "stock": null,
+      "ship": true,
+      "fresh": false
+    }
+  ]
+}
