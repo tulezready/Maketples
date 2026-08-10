@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Register your business — MaketPles ENB</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,13 +17,11 @@
     --hair:rgba(12,11,10,0.13); --hair-2:rgba(12,11,10,0.06);
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
   body{margin:0;background:var(--bone-2);color:var(--ink);
     font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.55;
     -webkit-font-smoothing:antialiased;}
   h1,h2,h3{margin:0;font-weight:400;}
-  .bod{font-family:'Bodoni Moda',serif;font-weight:500;}
-  .mono{font-family:'Space Mono',monospace;}
   button,input,select,textarea{font-family:inherit;font-size:inherit;}
   button{cursor:pointer;}
   a{color:var(--red);}
@@ -33,7 +31,6 @@
     var(--red) 0 20px, transparent 20px 23px, var(--green) 23px 43px,
     transparent 43px 46px, var(--ink) 46px 66px, transparent 66px 69px);
     background-color:var(--bone-2);}
-
   .gov{background:var(--ink);color:rgba(251,248,241,.72);font-family:'Space Mono',monospace;
     font-size:10px;letter-spacing:.12em;padding:10px 20px;text-transform:uppercase;text-align:center;}
   .gov b{color:#fff;font-weight:400;}
@@ -45,31 +42,31 @@
   .hdr .nm{font-family:'Bodoni Moda',serif;font-size:22px;line-height:1;}
   .hdr .dv{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.15em;
     text-transform:uppercase;color:var(--muted);margin-top:4px;}
+  .hdr .lnk{margin-left:auto;font-size:13px;font-weight:700;}
+  .hdr .lnk a{margin-left:16px;}
 
   .wrap{max-width:940px;margin:0 auto;padding:0 20px;}
 
   .intro{padding:44px 0 30px;}
-  .intro .eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.22em;
+  .eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.22em;
     text-transform:uppercase;color:var(--red-lt);font-weight:700;}
-  .intro h1{font-family:'Bodoni Moda',serif;font-size:clamp(32px,5.4vw,50px);line-height:1.02;
+  .intro h1{font-family:'Bodoni Moda',serif;font-size:clamp(30px,5.4vw,50px);line-height:1.02;
     letter-spacing:-.025em;margin:16px 0 0;}
   .intro h1 i{font-style:italic;color:var(--red);}
   .intro p{font-size:16px;line-height:1.7;color:#413B31;max-width:56ch;margin:18px 0 0;}
-
   .helpbox{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 0;}
   .help{background:var(--bone);border:1px solid var(--hair-2);border-radius:13px;padding:18px;}
   .help .n{font-family:'Bodoni Moda',serif;font-size:22px;color:var(--green);line-height:1;}
   .help h3{font-size:14px;font-weight:800;margin:9px 0 5px;}
   .help p{font-size:12.5px;color:var(--muted);line-height:1.6;margin:0;}
 
-  /* stepper */
-  .steps{display:flex;gap:6px;margin:34px 0 22px;flex-wrap:wrap;}
-  .step{flex:1;min-width:120px;padding-top:11px;border-top:3px solid var(--bone-3);transition:.25s;}
+  .steps{display:flex;gap:5px;margin:34px 0 20px;flex-wrap:wrap;}
+  .step{flex:1;min-width:82px;padding-top:11px;border-top:3px solid var(--bone-3);transition:.25s;}
   .step.on{border-top-color:var(--red);}
   .step.done{border-top-color:var(--green);}
-  .step .k{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.16em;
+  .step .k{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.16em;
     text-transform:uppercase;color:var(--muted);}
-  .step .t{font-size:13px;font-weight:700;margin-top:3px;}
+  .step .t{font-size:12.5px;font-weight:700;margin-top:3px;}
   .step.on .t{color:var(--red);}
   .step.done .k::after{content:" ✓";color:var(--green);}
 
@@ -109,6 +106,37 @@
   .chk input{width:auto;margin-top:3px;flex-shrink:0;}
   .chk span{font-size:13px;line-height:1.6;}
 
+  .prod{border:1px solid var(--hair);border-radius:12px;padding:16px;background:#fff;
+    margin-bottom:12px;position:relative;}
+  .prod .no{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:11px;display:block;}
+  .prod .rm{position:absolute;top:12px;right:12px;background:none;border:1px solid var(--hair);
+    color:var(--red);border-radius:100px;padding:4px 11px;font-size:11px;font-weight:700;}
+  .prod .rm:hover{background:var(--red);color:#fff;border-color:var(--red);}
+  .prod .fr{margin-bottom:12px;}
+  .addp{background:none;border:1.5px dashed var(--hair);color:var(--ink);width:100%;
+    padding:14px;border-radius:12px;font-weight:700;font-size:13.5px;}
+  .addp:hover{border-color:var(--green);color:var(--green);}
+
+  .drop{border:2px dashed var(--hair);border-radius:13px;padding:30px 20px;text-align:center;
+    background:#fff;cursor:pointer;transition:.2s;}
+  .drop:hover{border-color:var(--green);}
+  .drop .i{font-size:30px;margin-bottom:9px;}
+  .drop p{font-size:14px;font-weight:700;margin:0;}
+  .drop .s{font-size:12.5px;color:var(--muted);margin-top:6px;}
+  .pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:11px;margin-top:14px;}
+  .pic{border:1px solid var(--hair);border-radius:11px;overflow:hidden;background:#fff;}
+  .pic .im{aspect-ratio:1;position:relative;background:var(--bone-3);}
+  .pic .im img{width:100%;height:100%;object-fit:cover;display:block;}
+  .pic .rm{position:absolute;top:5px;right:5px;width:23px;height:23px;border-radius:50%;
+    background:rgba(12,11,10,.72);color:#fff;border:none;font-size:13px;line-height:1;
+    display:flex;align-items:center;justify-content:center;padding:0;}
+  .pic .rm:hover{background:var(--red);}
+  .pic select{width:100%;border:none;border-top:1px solid var(--hair-2);border-radius:0;
+    padding:8px 7px;font-size:11px;background:#fff;outline:none;}
+  .busy{font-size:12.5px;color:var(--green);font-weight:700;margin-top:10px;display:none;}
+  .busy.on{display:block;}
+
   .err{background:#FBE4E4;color:var(--red-dp);border-radius:11px;padding:13px 16px;
     font-size:13px;margin-bottom:18px;display:none;line-height:1.6;}
   .err.show{display:block;}
@@ -120,11 +148,11 @@
     font-weight:700;font-size:14px;transition:.22s;}
   .btn:hover{background:var(--red-dp);transform:translateY(-1px);}
   .btn.g{background:var(--green);} .btn.g:hover{background:#005423;}
+  .btn[disabled]{opacity:.5;cursor:not-allowed;transform:none;}
   .btn-o{background:none;border:1.5px solid var(--ink);color:var(--ink);padding:13px 26px;
     border-radius:100px;font-weight:700;font-size:14px;transition:.22s;}
   .btn-o:hover{background:var(--ink);color:var(--bone);}
 
-  /* review */
   .kv{display:grid;grid-template-columns:180px 1fr;gap:14px;padding:11px 0;
     border-top:1px solid var(--hair-2);font-size:13.5px;}
   .kv:first-of-type{border-top:none;}
@@ -132,7 +160,6 @@
     letter-spacing:.14em;color:var(--muted);padding-top:3px;}
   .kv .v.none{color:var(--muted);font-style:italic;}
 
-  /* done */
   .done{text-align:center;padding:20px 0 10px;}
   .done .tick{width:66px;height:66px;border-radius:50%;background:var(--green);
     color:#fff;font-size:31px;display:flex;align-items:center;justify-content:center;
@@ -143,7 +170,7 @@
     margin:24px auto;max-width:340px;}
   .refbox .k{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.18em;
     text-transform:uppercase;color:var(--green-gl);}
-  .refbox .v{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;margin-top:7px;}
+  .refbox .v{font-family:'Space Mono',monospace;font-size:24px;font-weight:700;margin-top:7px;}
   .next{text-align:left;max-width:520px;margin:26px auto 0;}
   .next .row{display:flex;gap:14px;padding:13px 0;border-top:1px solid var(--hair-2);}
   .next .row:first-child{border-top:none;}
@@ -153,20 +180,87 @@
   .next h4{font-size:14px;font-weight:800;margin-bottom:3px;}
   .next p{font-size:12.5px;color:var(--muted);line-height:1.6;margin:0;}
 
-  .demo{background:#FDF3DC;color:#6B4A05;border-bottom:1px solid #E8D08A;
-    padding:11px 20px;font-size:12.5px;text-align:center;}
-  .demo b{font-weight:800;}
+  .banner{padding:11px 20px;font-size:12.5px;text-align:center;}
+  .banner.warn{background:#FDF3DC;color:#6B4A05;border-bottom:1px solid #E8D08A;}
+  .banner b{font-weight:800;}
 
   footer{background:var(--ink);color:rgba(251,248,241,.55);padding:34px 20px;margin-top:40px;
     font-size:12px;text-align:center;line-height:1.7;}
   footer .l{max-width:620px;margin:0 auto;}
 
+
+  /* ---------- polish ---------- */
+  ::selection{background:var(--red);color:#fff;}
+  ::-moz-selection{background:var(--red);color:#fff;}
+  ::-webkit-scrollbar{width:11px;height:11px;}
+  ::-webkit-scrollbar-track{background:var(--bone-2);}
+  ::-webkit-scrollbar-thumb{background:var(--bone-3);border-radius:100px;border:3px solid var(--bone-2);}
+  ::-webkit-scrollbar-thumb:hover{background:var(--muted);}
+
+  .btn{position:relative;overflow:hidden;isolation:isolate;}
+  .btn::after{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.3) 50%,transparent 62%);
+    transform:translateX(-120%);
+  }
+  .btn:hover::after{transform:translateX(120%);transition:transform .75s cubic-bezier(.16,1,.3,1);}
+
+  .panel,.card,.stat{transition:box-shadow .3s,border-color .3s;}
+  .stat:hover{box-shadow:0 10px 26px -18px rgba(12,11,10,.4);}
+
+  tbody tr{transition:background .2s;}
+
+  :focus-visible{outline:2px solid var(--green-br);outline-offset:3px;border-radius:4px;}
+
+  @media (prefers-reduced-motion:reduce){
+    .btn::after{transition:none;}
+    *{animation:none!important;}
+  }
+
+  @media (max-width:900px){
+    .helpbox{grid-template-columns:1fr 1fr;}
+    .helpbox .help:last-child{grid-column:1/-1;}
+  }
   @media (max-width:760px){
     .grid2{grid-template-columns:1fr;}
     .helpbox{grid-template-columns:1fr;}
-    .card{padding:20px;}
+    .card{padding:22px;border-radius:14px;}
     .kv{grid-template-columns:1fr;gap:4px;}
-    .steps .t{font-size:11.5px;}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 16px;}
+    .hdr{padding:13px 16px;flex-wrap:wrap;gap:10px;}
+    .hdr img{width:36px;height:36px;}
+    .hdr .nm{font-size:19px;}
+    .hdr .lnk{margin-left:0;width:100%;padding-top:9px;
+      border-top:1px solid var(--hair-2);font-size:12.5px;}
+    .hdr .lnk a{margin-left:0;margin-right:16px;}
+    .intro{padding:30px 0 22px;}
+    .intro p{font-size:15px;margin-top:14px;}
+    .helpbox{margin-top:22px;gap:10px;}
+    .help{padding:15px;border-radius:11px;}
+    .steps{margin:26px 0 18px;gap:4px;}
+    .step{min-width:0;padding-top:9px;}
+    .step .k{font-size:7.5px;letter-spacing:.1em;}
+    .step .t{display:none;}
+    .step.on .t{display:block;font-size:12.5px;}
+    .card{padding:19px 17px;}
+    .card h2{font-size:21px;}
+    .card .lead{font-size:13px;margin-bottom:18px;}
+    .fr input,.fr select,.fr textarea{font-size:16px;padding:13px 14px;}
+    .radio{padding:14px;}
+    .chk{padding:14px;}
+    .nav{flex-direction:column-reverse;gap:9px;align-items:stretch;}
+    .nav .btn,.nav .btn-o{width:100%;text-align:center;}
+    .nav span{display:none;}
+    .pics{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));}
+    .done h2{font-size:26px;}
+    footer{padding:26px 16px calc(26px + env(safe-area-inset-bottom));}
+  }
+  @media (hover:none){
+    .btn,.btn-o{padding:15px 26px;}
+    .radio:hover{border-color:var(--hair);}
+    .radio:active{border-color:var(--ink);}
   }
 </style>
 </head>
@@ -176,48 +270,52 @@
 <div class="ribbon" aria-hidden="true"></div>
 
 <header>
-  <div class="hdr" style="justify-content:space-between;">
+  <div class="hdr">
     <img src="logo.svg" alt="">
     <div>
       <div class="nm">MaketPles ENB</div>
       <div class="dv">Division of Commerce &amp; Industry</div>
     </div>
-    <span style="margin-left:auto;font-size:13px;font-weight:700;">
-      <a href="index.html" style="margin-right:16px;">Marketplace</a>
+    <span class="lnk">
+      <a href="index.html">Marketplace</a>
       <a href="seller.html">Seller sign-in</a>
     </span>
   </div>
 </header>
 
-<div class="demo"><b>Design preview.</b> Nothing you enter here is submitted or stored.</div>
+<div id="modeBanner"></div>
 
 <div class="wrap">
 
   <section class="intro">
     <span class="eyebrow">Registration</span>
     <h1>Sell your products <i>beyond your district.</i></h1>
-    <p>If you run a business in East New Britain, you can apply to sell on MaketPles ENB. The Division of Commerce &amp; Industry reviews every application, so buyers know each business listed is a real, verified local enterprise.</p>
+    <p>If you run a business in East New Britain, you can apply to sell on MaketPles ENB.
+       The Division of Commerce &amp; Industry checks every application, so buyers know
+       each business listed is a real, verified local enterprise.</p>
 
     <div class="helpbox">
-      <div class="help"><div class="n">01</div><h3>Apply</h3>
-        <p>Fill in this form. It takes about five minutes and you only need your business details and a phone number.</p></div>
-      <div class="help"><div class="n">02</div><h3>We review</h3>
-        <p>The Division checks your application. If something is missing, we contact you rather than reject it.</p></div>
-      <div class="help"><div class="n">03</div><h3>Start listing</h3>
-        <p>Once approved you get your own login to add products, set prices and receive orders.</p></div>
+      <div class="help"><div class="n">01</div><h3>Fill this in</h3>
+        <p>About ten minutes. You need your business details, a phone number, and photos of what you sell.</p></div>
+      <div class="help"><div class="n">02</div><h3>We check it</h3>
+        <p>If anything is missing we phone you. We do not reject applications over small gaps.</p></div>
+      <div class="help"><div class="n">03</div><h3>You start selling</h3>
+        <p>Once approved you get your own login to manage prices, stock and orders.</p></div>
     </div>
   </section>
 
   <div class="steps" id="steps">
-    <div class="step on"><div class="k">Step 1</div><div class="t">Your business</div></div>
+    <div class="step on"><div class="k">Step 1</div><div class="t">Business</div></div>
     <div class="step"><div class="k">Step 2</div><div class="t">Contact</div></div>
     <div class="step"><div class="k">Step 3</div><div class="t">Registration</div></div>
-    <div class="step"><div class="k">Step 4</div><div class="t">Check &amp; send</div></div>
+    <div class="step"><div class="k">Step 4</div><div class="t">Products</div></div>
+    <div class="step"><div class="k">Step 5</div><div class="t">Photos</div></div>
+    <div class="step"><div class="k">Step 6</div><div class="t">Send</div></div>
   </div>
 
   <div class="err" id="err"></div>
 
-  <!-- STEP 1 -->
+  <!-- 1 -->
   <section class="card pane" id="p1">
     <h2>About your business</h2>
     <p class="lead">Tell us what you sell and where you are based.</p>
@@ -235,23 +333,27 @@
         <label>LLG, ward or village <span class="opt">(optional)</span></label>
         <input id="f_llg" placeholder="e.g. Bitapaka LLG, Vunamami">
       </div>
+      <div class="fr">
+        <label>How long have you been trading? <span class="opt">(optional)</span></label>
+        <input id="f_years_trading" placeholder="e.g. 6 years">
+      </div>
+      <div class="fr">
+        <label>How many people work with you? <span class="opt">(optional)</span></label>
+        <input id="f_staff_count" placeholder="e.g. 4">
+      </div>
       <div class="fr full">
         <label>What does your business mainly do? <span class="req">*</span></label>
         <div class="radios" id="industryRadios"></div>
       </div>
       <div class="fr full">
         <label>Tell us about your business <span class="opt">(optional but helpful)</span></label>
-        <textarea id="f_message" placeholder="What do you make or sell? How long have you been operating? How many people work with you?"></textarea>
-        <div class="hint">A few sentences is plenty. This helps the Division understand your business.</div>
+        <textarea id="f_message" placeholder="What do you make or sell? What makes it different from the next stall?"></textarea>
       </div>
     </div>
-    <div class="nav">
-      <span></span>
-      <button class="btn" onclick="go(1)">Continue</button>
-    </div>
+    <div class="nav"><span></span><button class="btn" onclick="go(1)">Continue</button></div>
   </section>
 
-  <!-- STEP 2 -->
+  <!-- 2 -->
   <section class="card pane" id="p2" style="display:none;">
     <h2>How we reach you</h2>
     <p class="lead">The Division will contact you about your application, so please check these carefully.</p>
@@ -277,10 +379,10 @@
     </div>
   </section>
 
-  <!-- STEP 3 -->
+  <!-- 3 -->
   <section class="card pane" id="p3" style="display:none;">
     <h2>Business registration</h2>
-    <p class="lead">We ask about this so the Division can help you if you are not yet registered.</p>
+    <p class="lead">We ask so the Division can help you if you are not yet registered.</p>
     <div class="fr">
       <label>Are you registered with IPA? <span class="req">*</span></label>
       <div class="radios" id="ipaRadios"></div>
@@ -290,7 +392,8 @@
       <input id="f_ipa_number" placeholder="From your certificate">
     </div>
     <div class="hint warn" id="ipaHelp" style="display:none;">
-      Not registered is not a barrier to applying. The Division works with IPA and IRC at its SME programmes and can help you register — say so below and we will follow up.
+      Not being registered does not stop you applying. The Division works alongside IPA and IRC
+      and can help you register — leave the box below ticked and we will follow up.
     </div>
     <div class="fr" style="margin-top:18px;">
       <div class="chk">
@@ -298,12 +401,43 @@
         <span>I would like help from the Division with business registration, a TIN, or opening a business bank account.</span>
       </div>
     </div>
-    <div class="fr">
-      <div class="chk" id="consentWrap">
-        <input type="checkbox" id="f_consent">
-        <span><b>I agree to my business appearing publicly on MaketPles ENB</b> — including my business name, district, products and prices — so that buyers can find and order from me. <span class="req">*</span></span>
-      </div>
-      <div class="hint">Your phone number, bank details and IPA number are never shown to buyers.</div>
+    <div class="nav">
+      <button class="btn-o" onclick="go(-1)">Back</button>
+      <button class="btn" onclick="go(1)">Continue</button>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="card pane" id="p4" style="display:none;">
+    <h2>What you sell</h2>
+    <p class="lead">Add your best sellers. You can add more once your business is approved.</p>
+    <div id="prodList"></div>
+    <button class="addp" onclick="addProduct()">+ Add another product</button>
+    <div class="nav">
+      <button class="btn-o" onclick="go(-1)">Back</button>
+      <button class="btn" onclick="go(1)">Continue</button>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="card pane" id="p5" style="display:none;">
+    <h2>Photographs</h2>
+    <p class="lead">Choose photos from your phone. We resize and rename them for you.</p>
+
+    <div class="drop" onclick="document.getElementById('picIn').click()">
+      <div class="i">🖼️</div>
+      <p>Tap to choose photos from your phone</p>
+      <div class="s">You can select several at once. Up to 12.</div>
+    </div>
+    <input type="file" id="picIn" accept="image/*" multiple style="display:none">
+    <div class="busy" id="picBusy">Preparing photos…</div>
+
+    <div class="pics" id="pics"></div>
+
+    <div class="hint" style="margin-top:16px;">
+      <b>What helps most:</b> one photo of you at your stall, garden or workshop, and a clear
+      photo of each product taken in daylight. If you know what a photo shows, choose it
+      underneath — otherwise leave it and the Division will sort it out.
     </div>
     <div class="nav">
       <button class="btn-o" onclick="go(-1)">Back</button>
@@ -311,44 +445,53 @@
     </div>
   </section>
 
-  <!-- STEP 4 -->
-  <section class="card pane" id="p4" style="display:none;">
-    <h2>Check your application</h2>
-    <p class="lead">Please make sure this is right before sending. You can go back and change anything.</p>
+  <!-- 6 -->
+  <section class="card pane" id="p6" style="display:none;">
+    <h2>Check and send</h2>
+    <p class="lead">Please make sure this is right. You can go back and change anything.</p>
     <div id="review"></div>
+
+    <div class="fr" style="margin-top:20px;">
+      <div class="chk" id="consentWrap">
+        <input type="checkbox" id="f_consent">
+        <span><b>I agree to my business appearing publicly on MaketPles ENB</b> — my business name,
+        district, products, prices and photographs shown to buyers. My phone number and any bank
+        details are never shown. I can ask for my business to be removed at any time. <span class="req">*</span></span>
+      </div>
+    </div>
+
     <div class="nav">
       <button class="btn-o" onclick="go(-1)">Back</button>
-      <button class="btn g" onclick="submitApp()">Send application</button>
+      <button class="btn g" id="submitBtn" onclick="submitApp()">Send application</button>
     </div>
   </section>
 
-  <!-- DONE -->
-  <section class="card pane" id="p5" style="display:none;">
+  <!-- done -->
+  <section class="card pane" id="p7" style="display:none;">
     <div class="done">
       <div class="tick">✓</div>
       <h2>Application received</h2>
-      <p>Thank you. The Division of Commerce &amp; Industry has your application and will be in touch on the number you gave us.</p>
+      <p>Thank you. The Division of Commerce &amp; Industry has your application
+         and will be in touch on the number you gave us.</p>
       <div class="refbox">
         <div class="k">Your reference</div>
         <div class="v" id="refNo">—</div>
       </div>
-      <p style="font-size:13.5px;color:var(--muted);">Write this down. Quote it if you contact the Division about your application.</p>
-
+      <p style="font-size:13.5px;color:var(--muted);">Write this down. Quote it if you contact the Division.</p>
       <div class="next">
         <div class="row"><span class="d">1</span><div>
-          <h4>We review your application</h4>
-          <p>Usually within a few working days. If anything is missing we will call you rather than reject it.</p></div></div>
+          <h4>We check your application</h4>
+          <p>Usually within a few working days. If anything is missing we will phone you.</p></div></div>
         <div class="row"><span class="d">2</span><div>
           <h4>You receive your login</h4>
-          <p>Once approved, we send you a link to set a password for your seller account.</p></div></div>
+          <p>Once approved we send you a link to set a password for your seller account.</p></div></div>
         <div class="row"><span class="d">3</span><div>
-          <h4>Add your products</h4>
-          <p>Photograph what you sell, set your prices, and submit your listings. The Division checks them before they go live.</p></div></div>
+          <h4>Your products go live</h4>
+          <p>The Division checks your listings, then buyers across PNG can order from you.</p></div></div>
         <div class="row"><span class="d">4</span><div>
-          <h4>Start receiving orders</h4>
-          <p>Orders arrive in your dashboard and by SMS. Payment goes to your own bank account.</p></div></div>
+          <h4>You get paid</h4>
+          <p>Payment goes to your own bank account. We collect those details after approval.</p></div></div>
       </div>
-
       <div class="nav" style="justify-content:center;border:none;margin-top:26px;">
         <button class="btn-o" onclick="location.reload()">Register another business</button>
       </div>
@@ -360,11 +503,48 @@
 <footer>
   <div class="l">
     Division of Commerce &amp; Industry · East New Britain Provincial Administration<br>
-    Design preview only — “MaketPles ENB” is a working name and no applications are being received through this page.
+    <span id="footNote">“MaketPles ENB” is a working name.</span>
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
+/* ============================================================
+   SUPABASE — paste your two values here
+   ------------------------------------------------------------
+     Supabase dashboard → Project Settings → API
+        Project URL     →  URL
+        anon public key →  KEY
+
+   The anon key is designed to be public. It is safe in this
+   file because row level security decides what it may do:
+   with it a visitor can submit an application, and nothing else.
+   They cannot read applications — not even their own.
+
+   Leave both blank and the form runs in preview mode: it
+   validates and shows the summary, but sends nothing.
+   ============================================================ */
+const SUPABASE = {
+  URL: "",
+  KEY: "",
+  BUCKET: "applications"
+};
+
+let sb = null, LIVE = false;
+if(SUPABASE.URL && SUPABASE.KEY && window.supabase){
+  try{
+    sb = window.supabase.createClient(SUPABASE.URL, SUPABASE.KEY);
+    LIVE = true;
+  }catch(e){ LIVE = false; }
+}
+if(!LIVE){
+  const b = document.getElementById('modeBanner');
+  b.className = 'banner warn';
+  b.innerHTML = '<b>Preview mode.</b> This form is not connected yet — nothing you enter is sent or stored.';
+  document.getElementById('footNote').textContent =
+    'Preview only — no applications are being received through this page.';
+}
+
 const DISTRICTS = ["Gazelle","Kokopo","Rabaul","Pomio"];
 const INDUSTRIES = [
   {key:"retail",     label:"Retail",
@@ -391,10 +571,17 @@ const IPA_OPTIONS = [
    desc:"You can still apply. The Division can help you register."},
 ];
 
+const PHOTO_MAX = 1400, PHOTO_Q = 0.82, MAX_PICS = 12;
+
 const data = {};
 let step = 1;
+let products = [];
+let pics = [];
 
-/* ---------- build the choice lists ---------- */
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g,
+  c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- choice lists ---------- */
 document.getElementById('f_district').innerHTML =
   '<option value="">Choose your district…</option>' +
   DISTRICTS.map(d=>`<option value="${d}">${d}</option>`).join('');
@@ -402,13 +589,13 @@ document.getElementById('f_district').innerHTML =
 document.getElementById('industryRadios').innerHTML = INDUSTRIES.map(i=>`
   <label class="radio" data-g="industry" data-v="${i.key}">
     <input type="radio" name="industry" value="${i.key}">
-    <span><span class="t">${i.label}</span><span class="d">${i.desc}</span></span>
+    <span><span class="t">${esc(i.label)}</span><span class="d">${esc(i.desc)}</span></span>
   </label>`).join('');
 
 document.getElementById('ipaRadios').innerHTML = IPA_OPTIONS.map(o=>`
   <label class="radio" data-g="ipa" data-v="${o.key}">
     <input type="radio" name="ipa" value="${o.key}">
-    <span><span class="t">${o.label}</span><span class="d">${o.desc}</span></span>
+    <span><span class="t">${esc(o.label)}</span><span class="d">${esc(o.desc)}</span></span>
   </label>`).join('');
 
 document.querySelectorAll('.radio').forEach(r=>{
@@ -426,27 +613,137 @@ document.querySelectorAll('.radio').forEach(r=>{
   });
 });
 
-/* ---------- validation ---------- */
-const RULES = {
-  1: [
-    ['f_business_name', v=>v.trim().length>1, 'Please enter your business name'],
-    ['f_district',      v=>!!v,               'Please choose your district'],
-    ['__industry',      ()=>!!picked('industry'), 'Please choose what your business mainly does'],
-  ],
-  2: [
-    ['f_contact_name', v=>v.trim().length>1, 'Please enter your full name'],
-    ['f_phone',        v=>v.replace(/\D/g,'').length>=7, 'Please enter a valid mobile number'],
-    ['f_email',        v=>!v.trim() || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim()),
-                       'That email address does not look right — leave it blank if you have none'],
-  ],
-  3: [
-    ['__ipa',      ()=>!!picked('ipa'), 'Please tell us your IPA registration status'],
-    ['f_consent',  null, 'You must agree to appear publicly in order to sell on MaketPles'],
-  ],
-};
+/* ---------- products ---------- */
+function addProduct(){
+  products.push({id:'pr'+Date.now()+Math.random().toString(36).slice(2,5),
+                 name:'', price:'', unit:'', stock:'', description:''});
+  drawProducts();
+}
+function removeProduct(id){
+  products = products.filter(p=>p.id!==id);
+  if(!products.length) addProduct();
+  drawProducts();
+}
+function drawProducts(){
+  document.getElementById('prodList').innerHTML = products.map((p,i)=>`
+    <div class="prod">
+      <span class="no">Product ${i+1}</span>
+      ${products.length>1?`<button class="rm" onclick="removeProduct('${p.id}')">Remove</button>`:''}
+      <div class="fr">
+        <label>Product name ${i===0?'<span class="req">*</span>':''}</label>
+        <input value="${esc(p.name)}" oninput="upd('${p.id}','name',this.value)"
+               placeholder="Include the size, e.g. Copra Oil (500ml)">
+      </div>
+      <div class="grid2">
+        <div class="fr">
+          <label>Price in Kina ${i===0?'<span class="req">*</span>':''}</label>
+          <input value="${esc(p.price)}" oninput="upd('${p.id}','price',this.value)"
+                 placeholder="0.00" inputmode="decimal">
+        </div>
+        <div class="fr">
+          <label>Sold by ${i===0?'<span class="req">*</span>':''}</label>
+          <input value="${esc(p.unit)}" oninput="upd('${p.id}','unit',this.value)"
+                 placeholder="each · per kg · per bundle">
+        </div>
+        <div class="fr">
+          <label>How many do you have? <span class="opt">(optional)</span></label>
+          <input value="${esc(p.stock)}" oninput="upd('${p.id}','stock',this.value)" placeholder="e.g. 40">
+        </div>
+        <div class="fr">
+          <label>Anything else about it? <span class="opt">(optional)</span></label>
+          <input value="${esc(p.description)}" oninput="upd('${p.id}','description',this.value)"
+                 placeholder="How it is grown or made">
+        </div>
+      </div>
+    </div>`).join('');
+  drawPicRoles();
+}
+function upd(id,k,v){ const p = products.find(x=>x.id===id); if(p) p[k]=v; }
+addProduct();
 
-function picked(group){
-  const el = document.querySelector(`.radio[data-g="${group}"].sel`);
+/* ---------- photos ---------- */
+document.getElementById('picIn').addEventListener('change', async e=>{
+  const files = [...e.target.files];
+  if(!files.length) return;
+  const busy = document.getElementById('picBusy');
+  busy.classList.add('on');
+  for(const f of files){
+    if(pics.length >= MAX_PICS){ alert('Twelve photographs is the maximum.'); break; }
+    if(!/^image\//.test(f.type)) continue;
+    try{
+      const out = await shrink(f);
+      pics.push({id:'pic'+Date.now()+Math.random().toString(36).slice(2,5),
+                 dataUrl:out.dataUrl, blob:out.blob, role:'product', name:f.name});
+    }catch(err){ /* skip unreadable files */ }
+  }
+  busy.classList.remove('on');
+  e.target.value = '';
+  drawPics();
+});
+
+function shrink(file){
+  return new Promise((res,rej)=>{
+    const fr = new FileReader();
+    fr.onerror = ()=>rej(new Error('unreadable'));
+    fr.onload = ()=>{
+      const img = new Image();
+      img.onerror = ()=>rej(new Error('not an image'));
+      img.onload = ()=>{
+        let w = img.width, h = img.height;
+        const sc = Math.min(1, PHOTO_MAX / Math.max(w,h));
+        w = Math.round(w*sc); h = Math.round(h*sc);
+        const cv = document.createElement('canvas');
+        cv.width = w; cv.height = h;
+        const ctx = cv.getContext('2d');
+        ctx.fillStyle = '#fff'; ctx.fillRect(0,0,w,h);
+        ctx.drawImage(img,0,0,w,h);
+        const dataUrl = cv.toDataURL('image/jpeg', PHOTO_Q);
+        cv.toBlob(b=>{
+          if(!b) return rej(new Error('could not compress'));
+          res({dataUrl, blob:b});
+        }, 'image/jpeg', PHOTO_Q);
+      };
+      img.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+}
+
+function drawPics(){
+  document.getElementById('pics').innerHTML = pics.map(p=>`
+    <div class="pic">
+      <div class="im">
+        <img src="${p.dataUrl}" alt="">
+        <button class="rm" onclick="rmPic('${p.id}')" aria-label="Remove">×</button>
+      </div>
+      <select onchange="setRole('${p.id}', this.value)"></select>
+    </div>`).join('');
+  drawPicRoles();
+}
+function drawPicRoles(){
+  const base = [
+    ['product','A product'],
+    ['business','Me / my stall'],
+    ['hero','Wide photo for the website'],
+  ];
+  const named = products.filter(p=>p.name.trim())
+    .map(p=>[`prod:${p.id}`, p.name.trim().slice(0,28)]);
+  document.querySelectorAll('.pic select').forEach((sel,i)=>{
+    const p = pics[i]; if(!p) return;
+    sel.innerHTML =
+      base.map(([v,l])=>`<option value="${v}">${esc(l)}</option>`).join('') +
+      (named.length ? '<optgroup label="Which product?">' +
+        named.map(([v,l])=>`<option value="${v}">${esc(l)}</option>`).join('') +
+        '</optgroup>' : '');
+    sel.value = p.role;
+  });
+}
+function setRole(id,v){ const p = pics.find(x=>x.id===id); if(p) p.role = v; }
+function rmPic(id){ pics = pics.filter(p=>p.id!==id); drawPics(); }
+
+/* ---------- validation ---------- */
+function picked(g){
+  const el = document.querySelector(`.radio[data-g="${g}"].sel`);
   return el ? el.dataset.v : null;
 }
 function clearErr(){
@@ -455,43 +752,71 @@ function clearErr(){
 }
 function showErr(list){
   const e = document.getElementById('err');
-  e.innerHTML = '<b>Please check the following:</b><ul>' +
-    list.map(m=>`<li>${m}</li>`).join('') + '</ul>';
+  e.innerHTML = '<b>Please check the following:</b><ul>'+list.map(m=>`<li>${m}</li>`).join('')+'</ul>';
   e.classList.add('show');
   e.scrollIntoView({behavior:'smooth', block:'center'});
+}
+function need(id,test,msg,out){
+  const el = document.getElementById(id);
+  if(!test(el.value)){ out.push(msg); el.classList.add('bad'); }
 }
 
 function validate(n){
   clearErr();
-  const problems = [];
-  (RULES[n]||[]).forEach(([id, test, msg])=>{
-    if(id==='f_consent'){
-      const c = document.getElementById('f_consent');
-      if(!c.checked){ problems.push(msg); document.getElementById('consentWrap').classList.add('bad'); }
-      return;
+  const p = [];
+  if(n===1){
+    need('f_business_name', v=>v.trim().length>1, 'Please enter your business name', p);
+    need('f_district', v=>!!v, 'Please choose your district', p);
+    if(!picked('industry')) p.push('Please choose what your business mainly does');
+  }
+  if(n===2){
+    need('f_contact_name', v=>v.trim().length>1, 'Please enter your full name', p);
+    need('f_phone', v=>v.replace(/\D/g,'').length>=7, 'Please enter a valid mobile number', p);
+    need('f_email', v=>!v.trim() || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim()),
+         'That email address does not look right — leave it blank if you have none', p);
+  }
+  if(n===3){
+    if(!picked('ipa')) p.push('Please tell us your IPA registration status');
+  }
+  if(n===4){
+    const first = products[0];
+    if(!first || !first.name.trim()) p.push('Please add at least one product');
+    else{
+      if(!String(first.price).trim() || isNaN(parseFloat(first.price)))
+        p.push('Please give a price in Kina for your first product');
+      if(!first.unit.trim())
+        p.push('Please say how the first product is sold — each, per kg, per bundle');
     }
-    if(id.startsWith('__')){
-      if(!test()) problems.push(msg);
-      return;
+    products.forEach((pr,i)=>{
+      if(i>0 && pr.name.trim() && (!String(pr.price).trim() || isNaN(parseFloat(pr.price))))
+        p.push('Product ' + (i+1) + ' needs a price, or remove it');
+    });
+  }
+  if(n===5){
+    if(!pics.length) p.push('Please add at least one photograph');
+  }
+  if(n===6){
+    if(!document.getElementById('f_consent').checked){
+      p.push('You must agree to appear publicly in order to sell on MaketPles');
+      document.getElementById('consentWrap').classList.add('bad');
     }
-    const el = document.getElementById(id);
-    if(!test(el.value)){ problems.push(msg); el.classList.add('bad'); }
-  });
-  if(problems.length){ showErr(problems); return false; }
+  }
+  if(p.length){ showErr(p); return false; }
   return true;
 }
 
 /* ---------- navigation ---------- */
 function go(dir){
-  if(dir > 0 && !validate(step)) return;
-  if(dir > 0) capture(step);
+  if(dir>0 && !validate(step)) return;
+  if(dir>0) capture(step);
   step += dir;
-  document.querySelectorAll('.pane').forEach((p,i)=>p.style.display = (i+1===step)?'block':'none');
+  document.querySelectorAll('.pane').forEach((el,i)=>el.style.display=(i+1===step)?'block':'none');
   document.querySelectorAll('#steps .step').forEach((s,i)=>{
     s.classList.toggle('on', i+1===step);
-    s.classList.toggle('done', i+1 < step);
+    s.classList.toggle('done', i+1<step);
   });
-  if(step===4) buildReview();
+  if(step===4) drawProducts();
+  if(step===6) buildReview();
   clearErr();
   window.scrollTo({top:document.getElementById('steps').offsetTop-20, behavior:'smooth'});
 }
@@ -502,6 +827,8 @@ function capture(n){
     data.business_name = g('f_business_name').trim();
     data.district = g('f_district');
     data.llg = g('f_llg').trim();
+    data.years_trading = g('f_years_trading').trim();
+    data.staff_count = g('f_staff_count').trim();
     data.primary_industry = picked('industry');
     data.message = g('f_message').trim();
   }
@@ -514,14 +841,15 @@ function capture(n){
     data.ipa_status = picked('ipa');
     data.ipa_number = g('f_ipa_number').trim();
     data.wants_help = document.getElementById('f_wants_help').checked;
-    data.consent = document.getElementById('f_consent').checked;
   }
 }
 
 function buildReview(){
   const ind = (INDUSTRIES.find(i=>i.key===data.primary_industry)||{}).label || "—";
-  const row = (k,v,none) => `<div class="kv"><span class="k">${k}</span>` +
+  const row = (k,v,none) => `<div class="kv"><span class="k">${k}</span>`+
     `<span class="v${v?'':' none'}">${v || (none||'not supplied')}</span></div>`;
+  const plist = products.filter(p=>p.name.trim())
+    .map(p=>`${esc(p.name)} — K${esc(p.price)} ${esc(p.unit)}`).join('<br>');
   document.getElementById('review').innerHTML =
     row('Business name', esc(data.business_name)) +
     row('District', esc(data.district)) +
@@ -534,32 +862,120 @@ function buildReview(){
     row('IPA status', esc(data.ipa_status)) +
     (data.ipa_number ? row('IPA number', esc(data.ipa_number)) : '') +
     row('Wants Division help', data.wants_help ? 'Yes' : 'No') +
-    row('Agreed to appear publicly', data.consent ? 'Yes' : 'No');
+    row('Products', plist) +
+    row('Photographs', pics.length + ' photo' + (pics.length===1?'':'s'));
 }
-function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
-function submitApp(){
-  /* ----------------------------------------------------------
-     LIVE VERSION: this becomes an insert into seller_applications.
-     The table's RLS policy allows anyone to insert, and only the
-     Division to read — so an applicant cannot see other
-     applications. status defaults to 'pending'.
+/* ---------- submit ---------- */
+const tidy = s => String(s||'').replace(/[^A-Za-z0-9]+/g,'-')
+                    .replace(/^-|-$/g,'').slice(0,28) || 'x';
 
-       await supabase.from('seller_applications').insert({
-         business_name:    data.business_name,
-         district:         data.district,
-         primary_industry: data.primary_industry,
-         contact_name:     data.contact_name,
-         phone:            data.phone,
-         email:            data.email || null,
-         ipa_status:       data.ipa_status,
-         message:          data.message || null
-       });
-     ---------------------------------------------------------- */
-  const ref = "ENB-A" + Math.floor(1000 + Math.random()*9000);
+async function submitApp(){
+  if(!validate(6)) return;
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+
+  if(!LIVE){
+    btn.disabled = false;
+    finish('ENB-A' + Math.floor(1000+Math.random()*9000));
+    return;
+  }
+
+  btn.textContent = 'Sending…';
+  try{
+    const ins = await sb.from('seller_applications').insert({
+      business_name:    data.business_name,
+      district:         data.district,
+      llg:              data.llg || null,
+      primary_industry: data.primary_industry,
+      contact_name:     data.contact_name,
+      phone:            data.phone,
+      email:            data.email || null,
+      ipa_status:       data.ipa_status,
+      years_trading:    data.years_trading || null,
+      staff_count:      data.staff_count || null,
+      message:          data.message || null,
+      wants_help:       !!data.wants_help,
+      consent:          true,
+      submitted_from:   'web'
+    }).select('id, reference').single();
+    if(ins.error) throw ins.error;
+    const app = ins.data;
+
+    const rows = products.filter(p=>p.name.trim()).map((p,i)=>({
+      application_id: app.id,
+      name: p.name.trim(),
+      category: data.primary_industry,
+      price: parseFloat(p.price) || null,
+      unit: p.unit.trim() || null,
+      stock: p.stock.trim() || null,
+      description: p.description.trim() || null,
+      sort_order: i
+    }));
+    let saved = [];
+    if(rows.length){
+      const pr = await sb.from('application_products').insert(rows).select('id, name');
+      if(pr.error) throw pr.error;
+      saved = pr.data || [];
+    }
+
+    btn.textContent = 'Sending photos…';
+    const folder = app.reference || app.id;
+    const counters = {};
+    const photoRows = [];
+
+    for(let i=0;i<pics.length;i++){
+      const p = pics[i];
+      let kind = 'product', productId = null, tag = 'product';
+
+      if(p.role === 'business'){ kind = 'business'; tag = 'business'; }
+      else if(p.role === 'hero'){ kind = 'hero'; tag = 'frontpage'; }
+      else if(p.role.indexOf('prod:') === 0){
+        const local = products.find(x=>x.id === p.role.slice(5));
+        const match = local && saved.find(s=>s.name === local.name.trim());
+        if(match){ productId = match.id; tag = tidy(local.name); }
+      }
+
+      counters[tag] = (counters[tag]||0) + 1;
+      const n = String(counters[tag]).padStart(2,'0');
+      const fname = tidy(data.district)+'_'+tidy(data.business_name)+'_'+tag+'_'+n+'.jpg';
+      const path  = folder+'/'+fname;
+
+      const up = await sb.storage.from(SUPABASE.BUCKET)
+        .upload(path, p.blob, {contentType:'image/jpeg', upsert:false});
+      if(up.error) throw up.error;
+
+      photoRows.push({
+        application_id: app.id,
+        product_id: productId,
+        kind: kind,
+        storage_path: path,
+        original_name: p.name,
+        bytes: p.blob.size,
+        sort_order: i
+      });
+    }
+
+    if(photoRows.length){
+      const ph = await sb.from('application_photos').insert(photoRows);
+      if(ph.error) throw ph.error;
+    }
+
+    finish(app.reference || '—');
+
+  }catch(err){
+    btn.disabled = false;
+    btn.textContent = 'Send application';
+    showErr(['Your application could not be sent. ' +
+             (err && err.message ? err.message : 'Please check your connection and try again.') +
+             ' Nothing has been lost — press Send again.']);
+  }
+}
+
+function finish(ref){
   document.getElementById('refNo').textContent = ref;
-  step = 5;
-  document.querySelectorAll('.pane').forEach((p,i)=>p.style.display = (i+1===step)?'block':'none');
+  step = 7;
+  document.querySelectorAll('.pane').forEach((el,i)=>el.style.display=(i+1===step)?'block':'none');
   document.querySelectorAll('#steps .step').forEach(s=>{s.classList.remove('on');s.classList.add('done');});
   window.scrollTo({top:0, behavior:'smooth'});
 }

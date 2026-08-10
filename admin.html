@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Division Panel — MaketPles ENB</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +18,7 @@
     --hair:rgba(12,11,10,0.13); --hair-2:rgba(12,11,10,0.06);
   }
   *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
   body{margin:0;background:var(--bone-2);color:var(--ink);
     font-family:'Plus Jakarta Sans',sans-serif;font-size:14.5px;line-height:1.5;
     -webkit-font-smoothing:antialiased;}
@@ -162,17 +163,159 @@
   .warnbox{background:#FBF0D8;border-left:3px solid var(--amber);border-radius:8px;
     padding:11px 14px;font-size:12px;color:#6B4A05;line-height:1.55;margin:14px 0;}
 
-  @media (max-width:900px){
+
+  /* ---------- polish ---------- */
+  ::selection{background:var(--red);color:#fff;}
+  ::-moz-selection{background:var(--red);color:#fff;}
+  ::-webkit-scrollbar{width:11px;height:11px;}
+  ::-webkit-scrollbar-track{background:var(--bone-2);}
+  ::-webkit-scrollbar-thumb{background:var(--bone-3);border-radius:100px;border:3px solid var(--bone-2);}
+  ::-webkit-scrollbar-thumb:hover{background:var(--muted);}
+
+  .btn{position:relative;overflow:hidden;isolation:isolate;}
+  .btn::after{
+    content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.3) 50%,transparent 62%);
+    transform:translateX(-120%);
+  }
+  .btn:hover::after{transform:translateX(120%);transition:transform .75s cubic-bezier(.16,1,.3,1);}
+
+  .panel,.card,.stat{transition:box-shadow .3s,border-color .3s;}
+  .stat:hover{box-shadow:0 10px 26px -18px rgba(12,11,10,.4);}
+
+  tbody tr{transition:background .2s;}
+
+  :focus-visible{outline:2px solid var(--green-br);outline-offset:3px;border-radius:4px;}
+
+  @media (prefers-reduced-motion:reduce){
+    .btn::after{transition:none;}
+    *{animation:none!important;}
+  }
+
+  /* ==========================================================
+     RESPONSIVE
+     ========================================================== */
+
+  /* ---------- narrow desktop: tighten the sidebar ---------- */
+  @media (max-width:1200px){
+    .app{grid-template-columns:212px 1fr;}
+    .stats{gap:11px;}
+    .stat{padding:15px;}
+    .stat .n{font-size:27px;}
+  }
+
+  /* ---------- tablet ---------- */
+  @media (max-width:1000px){
     .app{grid-template-columns:1fr;}
-    .side{position:relative;height:auto;}
-    .nav{flex-direction:row;overflow-x:auto;}
+    .side{position:sticky;top:0;height:auto;z-index:30;flex-direction:row;
+      align-items:center;gap:8px;padding-right:10px;}
+    .side-top{border-bottom:none;border-right:1px solid rgba(251,248,241,.12);
+      padding:12px 16px;flex-shrink:0;}
+    .side-top .t{font-size:15px;}
+    .nav{flex-direction:row;overflow-x:auto;padding:9px 4px;gap:4px;
+      scrollbar-width:none;}
+    .nav::-webkit-scrollbar{display:none;}
     .nav .grp{display:none;}
-    .nav button{white-space:nowrap;}
+    .nav button{white-space:nowrap;padding:9px 14px;}
     .side-bot{display:none;}
-    .stats{grid-template-columns:1fr 1fr;}
-    .content,.top{padding-left:15px;padding-right:15px;}
+    .top{top:0;}
+    .stats{grid-template-columns:repeat(4,1fr);}
+  }
+
+  /* ---------- phone ---------- */
+  @media (max-width:680px){
+    .side-top .t,.side-top .s{display:none;}
+    .side-top{padding:10px 12px;}
+    .nav button{font-size:12.5px;padding:9px 13px;}
+    .content{padding:16px 14px 60px;}
+    .top{padding:14px;}
+    .top h1{font-size:20px;}
+    .demo{padding:9px 14px;font-size:11.5px;}
+
+    .stats{grid-template-columns:1fr 1fr;gap:10px;}
+    .stat{padding:14px;border-radius:11px;}
+    .stat .n{font-size:25px;}
+    .stat .l{font-size:11px;}
+
+    .panel{border-radius:11px;}
+    .panel-hd{padding:13px 15px;}
+    .panel-hd h2{font-size:16px;}
+    .panel-bd{padding:15px;}
+
+    .filters{gap:7px;}
+    .filters input{min-width:0;flex:1 1 100%;}
+    .filters select{flex:1 1 auto;}
+
+    /* --- tables become stacked cards, no sideways scrolling --- */
+    .tbl-wrap{overflow-x:visible;}
+    table{min-width:0;display:block;}
+    thead{display:none;}
+    tbody,tr,td{display:block;width:100%;}
+    tr{background:#fff;border:1px solid var(--hair-2);border-radius:12px;
+      padding:13px 15px;margin-bottom:10px;}
+    tbody tr:hover{background:#fff;}
+    td{border:none;padding:5px 0;font-size:13px;}
+    td:first-child{padding-top:0;}
+    td:last-child{padding-bottom:0;padding-top:11px;
+      border-top:1px solid var(--hair-2);margin-top:7px;}
+    td:empty{display:none;}
+    .acts{justify-content:flex-start;}
+    .acts .btn-o,.acts .btn,.acts .btn-warn{flex:1;text-align:center;}
+
+    /* label the ambiguous cells so a bare value still makes sense */
+    #appRows  td:nth-child(2)::before,
+    #smeRows  td:nth-child(2)::before{content:"District: ";color:var(--muted);font-size:11.5px;}
+    #appRows  td:nth-child(5)::before{content:"Source: ";color:var(--muted);font-size:11.5px;}
+    #listRows td:nth-child(2)::before{content:"Business: ";color:var(--muted);font-size:11.5px;}
+    #listRows td:nth-child(4)::before{content:"Price: ";color:var(--muted);font-size:11.5px;}
+    #smeRows  td:nth-child(4)::before{content:"Products: ";color:var(--muted);font-size:11.5px;}
+    #ordRows  td:nth-child(2)::before{content:"Business: ";color:var(--muted);font-size:11.5px;}
+    #ordRows  td:nth-child(3)::before{content:"Buyer: ";color:var(--muted);font-size:11.5px;}
+    #ordRows  td:nth-child(5)::before{content:"Total: ";color:var(--muted);font-size:11.5px;}
+    #agRows   td:nth-child(2)::before{content:"District: ";color:var(--muted);font-size:11.5px;}
+    #agRows   td:nth-child(4)::before{content:"Commission: ";color:var(--muted);font-size:11.5px;}
+    #agRows   td:nth-child(5)::before{content:"Orders: ";color:var(--muted);font-size:11.5px;}
+    #payRows  td:nth-child(2)::before{content:"District: ";color:var(--muted);font-size:11.5px;}
+    #payRows  td:nth-child(3)::before{content:"Orders: ";color:var(--muted);font-size:11.5px;}
+    #payRows  td:nth-child(4)::before{content:"Gross: ";color:var(--muted);font-size:11.5px;}
+    #payRows  td:nth-child(5)::before{content:"Platform fee: ";color:var(--muted);font-size:11.5px;}
+    #payRows  td:nth-child(6)::before{content:"Agent fee: ";color:var(--muted);font-size:11.5px;}
+    #payRows  td:nth-child(7)::before{content:"Net owed: ";color:var(--muted);font-size:11.5px;}
+    #notRows  td:nth-child(2)::before{content:"Category: ";color:var(--muted);font-size:11.5px;}
+
     .prow{grid-template-columns:1fr;gap:6px;}
     .prow .val{text-align:left;}
+
+    /* modal rises as a sheet from the bottom */
+    .movl{padding:0;align-items:flex-end;}
+    .modal{width:100%;max-width:100%;max-height:92vh;
+      border-radius:18px 18px 0 0;}
+    .mhd{padding:18px 18px 8px;}
+    .mhd h3{font-size:19px;}
+    .mbd{padding:4px 18px calc(20px + env(safe-area-inset-bottom));}
+    .kv{grid-template-columns:1fr;gap:3px;padding:9px 0;}
+    .mact{flex-direction:column-reverse;}
+    .mact .btn,.mact .btn-o{width:100%;}
+
+    /* iOS refuses to zoom a focused field only if it is at least 16px */
+    .fr input,.fr select,.fr textarea,
+    .filters input,.filters select{font-size:16px;}
+  }
+
+  /* ---------- small phone ---------- */
+  @media (max-width:400px){
+    .stats{grid-template-columns:1fr;}
+    .content{padding:14px 11px 56px;}
+    .top{padding:12px 11px;}
+    tr{padding:12px;}
+  }
+
+  /* ---------- touch ---------- */
+  @media (hover:none){
+    .nav button{padding:11px 15px;}
+    .btn,.btn-o{padding:11px 19px;}
+    .btn-sm,.btn-warn{padding:9px 15px;}
+    tbody tr:hover{background:var(--bone);}
   }
 </style>
 </head>

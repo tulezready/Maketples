@@ -797,9 +797,16 @@ create policy notices_division_all on notices
 -- 6. HELPER VIEWS
 -- ============================================================
 
+-- IMPORTANT
+-- Every view below is created with security_invoker = true.
+-- Without it a Postgres view runs with the privileges of whoever
+-- created it, which silently bypasses the row level security on
+-- the tables underneath — seller_payouts would hand every
+-- business's revenue to anyone holding the public key.
+
 -- ---------- 6.1 public catalogue ----------
 -- What the website reads. Already filtered to live and approved.
-create or replace view public_catalogue as
+create or replace view public_catalogue with (security_invoker = true) as
 select
   p.id            as product_id,
   p.name,
@@ -824,7 +831,7 @@ where p.status = 'live' and s.approved = true;
 
 -- ---------- 6.2 seller payout summary ----------
 -- What each SME is owed, and what has already been settled.
-create or replace view seller_payouts as
+create or replace view seller_payouts with (security_invoker = true) as
 select
   s.id                as sme_id,
   s.registered_name,
@@ -843,7 +850,7 @@ group by s.id, s.registered_name, s.district;
 
 -- ---------- 6.3 collection progress ----------
 -- Mirrors the intake tool's dashboard, against live data.
-create or replace view intake_progress as
+create or replace view intake_progress with (security_invoker = true) as
 select
   i.industry,
   count(s.id)                    as businesses,
