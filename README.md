@@ -4,7 +4,7 @@ Official online marketplace for small and medium enterprises in East New Britain
 
 Built for the **Division of Commerce & Industry**, East New Britain Provincial Administration.
 
-> **Status: design preview.** Every page here runs on sample data held in the browser. No database is connected, no accounts are real, and no payments are processed. See [What's next](#whats-next).
+> **Status: partially connected.** `register.html` and `admin.html` talk to a real Supabase database once you follow `docs/supabase-setup.md` — businesses can apply through the link, and the Division can review, tag photos, and approve them through the panel. `index.html` (the marketplace) and `seller.html` (seller sign-in) still run on sample data; connecting them is the next step under [What's next](#whats-next).
 
 ---
 
@@ -15,7 +15,7 @@ Built for the **Division of Commerce & Industry**, East New Britain Provincial A
 | `index.html` | The public marketplace | Buyers |
 | `register.html` | Application form to join the platform | Businesses applying |
 | `seller.html` | Seller portal — listings, orders, payouts | Approved SMEs |
-| `admin.html` | Division panel — approvals, oversight, reporting | Division staff |
+| `admin.html` | Division panel — approvals, listing review, oversight, reporting. **Connects to Supabase** — see `docs/supabase-setup.md` | Division staff |
 | `tools/intake.html` | Offline data collection tool | District officers, conference desk |
 | `tools/sme-form.pdf` | Printable one-page field form | Taken to businesses on visits |
 | `db/schema.sql` | Core database schema, tested | Run once on a new Supabase project |
@@ -151,6 +151,15 @@ applicant cannot read anything back, including their own submission.
 Until the two Supabase values are filled into `register.html`, the form shows an
 amber preview bar and sends nothing — safe to share for comment, not for real use.
 
+**On the Division's side**, `admin.html` → **Business applications** shows every
+submission. Opening one loads the products and photographs the business
+actually sent — each photo has a dropdown showing what it was tagged as
+(business, front page, or a specific product), fixable before you approve.
+Approving calls a database function that creates the business, moves its
+photographs into the public bucket, and copies its products across as drafts
+waiting in **Listing review**. Same amber-bar rule applies: until `admin.html`
+has its own Supabase values filled in, it runs on sample data only.
+
 ---
 
 ## Collecting from a business in person
@@ -226,7 +235,9 @@ After running it:
 Current state is a working catalogue plus a data-collection system. To become a live marketplace it needs:
 
 - [ ] Supabase project on the Pro tier, schema applied
-- [ ] All four apps connected to the database instead of sample data
+- [x] `register.html` connected to Supabase — public applications land in the database
+- [x] `admin.html` connected to Supabase — Division staff sign in, review, and approve for real
+- [ ] `index.html` and `seller.html` connected to the database instead of sample data
 - [ ] Real authentication for sellers and Division staff
 - [ ] Payment gateway integration (BSP IPG or Cloudcode) — pending merchant approval
 - [ ] SMS notifications for orders and "send home" recipients

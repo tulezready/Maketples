@@ -29,7 +29,50 @@
   button{cursor:pointer;}
   :focus-visible{outline:2px solid var(--green-br);outline-offset:2px;}
 
-  .app{display:grid;grid-template-columns:242px 1fr;min-height:100vh;}
+  /* ---------- LOGIN ---------- */
+  .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;
+    background:var(--ink);position:relative;overflow:hidden;}
+  .login-wrap::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(60% 80% at 78% 12%, rgba(18,169,75,.16), transparent 62%),
+               radial-gradient(50% 70% at 12% 88%, rgba(168,27,31,.2), transparent 60%);}
+  .login{position:relative;z-index:2;background:var(--bone);border-radius:20px;
+    width:420px;max-width:100%;padding:34px;border-top:3px solid var(--green-br);}
+  .login .brand{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+  .login .brand img{width:44px;height:44px;border-radius:50%;background:#fff;padding:2px;
+    box-shadow:0 0 0 1.5px var(--red);}
+  .login .brand .nm{font-family:'Bodoni Moda',serif;font-size:21px;line-height:1;}
+  .login .brand .dv{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--green);margin-top:4px;}
+  .login h1{font-family:'Bodoni Moda',serif;font-size:27px;margin-bottom:7px;}
+  .login .lead{font-size:13.5px;color:var(--muted);margin-bottom:22px;line-height:1.6;}
+  .login .fr{margin-bottom:15px;}
+  .login label{display:block;font-size:12.5px;font-weight:700;margin-bottom:6px;}
+  .login input{width:100%;padding:12px 14px;border:1px solid var(--hair);border-radius:10px;
+    background:#fff;outline:none;transition:.18s;}
+  .login input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(0,112,47,.09);}
+  .login .btn{width:100%;margin-top:8px;}
+  .login .alt{text-align:center;font-size:12.5px;color:var(--muted);margin-top:20px;
+    padding-top:18px;border-top:1px solid var(--hair-2);line-height:1.7;}
+  .login .err{margin-bottom:16px;}
+  .err{background:#FBE4E4;color:#560A0C;border-radius:10px;padding:12px 14px;
+    font-size:12.5px;line-height:1.55;display:none;}
+  .err.show{display:block;}
+  .demo-hint{background:#FBF0D8;border-left:3px solid var(--amber);border-radius:8px;
+    padding:11px 13px;font-size:12px;color:#6B4A05;line-height:1.55;margin-bottom:20px;}
+  @media (max-width:520px){
+    .login-wrap{padding:0;align-items:stretch;}
+    .login{width:100%;border-radius:0;padding:28px 20px calc(28px + env(safe-area-inset-bottom));
+      display:flex;flex-direction:column;justify-content:center;}
+    .login h1{font-size:24px;}
+  }
+
+  /* ---------- APP (hidden until signed in) ---------- */
+  .app{display:none;grid-template-columns:242px 1fr;min-height:100vh;}
+  .app.on{display:grid;}
+  .signout{font-size:11.5px;color:rgba(251,248,241,.45);margin-top:11px;background:none;
+    border:none;padding:0;text-align:left;cursor:pointer;font-family:inherit;}
+  .signout:hover{color:var(--bone);}
+  .mob-signout{display:none;}
   .side{background:var(--ink);color:var(--bone);display:flex;flex-direction:column;
     position:sticky;top:0;height:100vh;}
   .side-top{padding:18px;border-bottom:1px solid rgba(251,248,241,0.12);
@@ -163,6 +206,14 @@
   .warnbox{background:#FBF0D8;border-left:3px solid var(--amber);border-radius:8px;
     padding:11px 14px;font-size:12px;color:#6B4A05;line-height:1.55;margin:14px 0;}
 
+  .app-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin-top:8px;}
+  .app-photo{border:1px solid var(--hair);border-radius:9px;overflow:hidden;background:#fff;}
+  .app-photo img{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
+  .app-photo-broken{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+    background:var(--bone-3);color:var(--muted);font-size:10px;text-align:center;padding:6px;}
+  .app-photo select{width:100%;border:none;border-top:1px solid var(--hair-2);border-radius:0;
+    padding:6px 5px;font-size:10.5px;background:#fff;outline:none;}
+
 
   /* ---------- polish ---------- */
   ::selection{background:var(--red);color:#fff;}
@@ -218,6 +269,7 @@
     .nav .grp{display:none;}
     .nav button{white-space:nowrap;padding:9px 14px;}
     .side-bot{display:none;}
+    .mob-signout{display:block;color:rgba(251,248,241,.55);}
     .top{top:0;}
     .stats{grid-template-columns:repeat(4,1fr);}
   }
@@ -321,7 +373,41 @@
 </head>
 <body>
 
-<div class="app">
+<div class="login-wrap" id="loginWrap">
+  <div class="login">
+    <div class="brand">
+      <img src="logo.svg" alt="">
+      <div>
+        <div class="nm">MaketPles ENB</div>
+        <div class="dv">Division Panel</div>
+      </div>
+    </div>
+    <h1>Sign in</h1>
+    <p class="lead">For Division of Commerce &amp; Industry staff only.</p>
+
+    <div class="demo-hint" id="loginHint">
+      <b>Design preview.</b> Sign in with anything — no account is checked and nothing is saved.
+    </div>
+    <div class="err" id="loginErr"></div>
+
+    <div class="fr">
+      <label>Email</label>
+      <input id="l_user" type="email" placeholder="you@enbpa.gov.pg" autocomplete="username">
+    </div>
+    <div class="fr">
+      <label>Password</label>
+      <input id="l_pass" type="password" placeholder="Your password" autocomplete="current-password">
+    </div>
+    <button class="btn g" id="loginBtn" onclick="signIn()">Sign in</button>
+
+    <div class="alt">
+      Not staff? The <a href="register.html">business registration form</a> and
+      <a href="seller.html">seller sign-in</a> are elsewhere.
+    </div>
+  </div>
+</div>
+
+<div class="app" id="app">
   <aside class="side">
     <div class="side-top">
       <img src="logo.svg" alt="">
@@ -344,20 +430,22 @@
       <div class="grp">Reporting</div>
       <button data-v="progress">Launch progress</button>
       <button data-v="payouts">Payouts owed</button>
+      <button class="mob-signout" onclick="signOut()">Sign out</button>
     </nav>
     <div class="side-bot">
       <div class="who">
-        <span class="av">DA</span>
+        <span class="av" id="whoAv">DA</span>
         <div>
-          <div class="n">Division Admin</div>
-          <div class="r">division_admin</div>
+          <div class="n" id="whoName">Division Admin</div>
+          <div class="r" id="whoRole">division_admin</div>
         </div>
       </div>
+      <button class="signout" onclick="signOut()">Sign out</button>
     </div>
   </aside>
 
   <main>
-    <div class="demo">
+    <div class="demo" id="demoBanner">
       <span>⚠</span>
       <span><b>Design preview.</b> Sample data, held in memory only — nothing is saved and no live records are affected. Once connected to Supabase, every action here writes to the real database under the rules in schema.sql.</span>
     </div>
@@ -370,6 +458,7 @@
       <div class="acts">
         <a class="btn-o btn-sm" href="tools/intake.html" style="text-decoration:none;">Intake tool</a>
         <a class="btn-o btn-sm" href="index.html" style="text-decoration:none;">Marketplace</a>
+        <button class="btn-o btn-sm" id="refreshBtn" onclick="refreshAll()" style="display:none;">Refresh</button>
         <button class="btn-o btn-sm" onclick="exportCSV()">Export orders CSV</button>
       </div>
     </div>
@@ -535,9 +624,42 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 /* ============================================================
-   SAMPLE DATA — mirrors the shape of schema.sql
+   SUPABASE — paste your two values here
+   ------------------------------------------------------------
+     Supabase dashboard → Project Settings → API
+        Project URL     →  URL
+        anon public key →  KEY
+
+   Use the SAME project as register.html. Division staff sign in
+   with the account you created in docs/supabase-setup.md step 4.
+
+   Leave both blank and this panel runs in preview mode: sample
+   data only, any email/password signs in, nothing is saved.
+   ============================================================ */
+const SUPABASE = {
+  URL: "",
+  KEY: "",
+  APPLICATIONS_BUCKET: "applications",
+  PHOTOS_BUCKET: "product-photos"
+};
+
+let sb = null, LIVE = false, currentUserId = null;
+if(SUPABASE.URL && SUPABASE.KEY && window.supabase){
+  try{ sb = window.supabase.createClient(SUPABASE.URL, SUPABASE.KEY); LIVE = true; }
+  catch(e){ LIVE = false; }
+}
+if(!LIVE){
+  document.getElementById('loginHint').innerHTML =
+    '<b>Design preview.</b> Sign in with anything — no account is checked and nothing is saved.';
+} else {
+  document.getElementById('loginHint').outerHTML = '';
+}
+
+/* ============================================================
+   SAMPLE DATA — used only in preview mode (SUPABASE left blank)
    ============================================================ */
 const DISTRICTS = ["Gazelle","Kokopo","Rabaul","Pomio"];
 const INDUSTRIES = [
@@ -548,7 +670,7 @@ const INDUSTRIES = [
 ];
 const TARGET_EACH = 5, TARGET_TOTAL = 35;
 
-let applications = [
+const SAMPLE_APPLICATIONS = [
   {id:"a1", business_name:"Vunamami Growers Collective", district:"Kokopo", primary_industry:"produce",
    contact_name:"J. Tobing", phone:"+675 7100 0001", email:"", ipa_status:"Registered",
    source:"Conference", message:"Smallholder cocoa and garden produce growers, 14 members.", status:"pending", created:"2 hours ago"},
@@ -566,7 +688,7 @@ let applications = [
    source:"Website", message:"", status:"rejected", review_note:"No contact name or business detail supplied.", created:"4 days ago"},
 ];
 
-let smes = [
+const SAMPLE_SMES = [
   {id:"s1", registered_name:"Kokopo Trade Supplies", district:"Kokopo", primary_industry:"wholesale",
    contact_name:"L. Waninara", phone:"+675 7100 0004", approved:true, featured:true, consent:true, products:4},
   {id:"s2", registered_name:"Kerevat Mill Co.", district:"Gazelle", primary_industry:"processing",
@@ -577,7 +699,7 @@ let smes = [
    contact_name:"T. Vunagi", phone:"+675 7100 0012", approved:false, featured:false, consent:false, products:2},
 ];
 
-let listings = [
+const SAMPLE_LISTINGS = [
   {id:"l1", name:"Cold-Pressed Copra Oil (500ml)", sme:"Kerevat Mill Co.", category:"processing",
    price:32.00, unit:"per bottle", stock:40, status:"in_review", photos:2,
    description:"Cold-pressed at the Kerevat mill from locally grown coconut.", submitted:"1 hour ago"},
@@ -595,7 +717,7 @@ let listings = [
    review_note:"Photograph is too dark — please retake in daylight.", submitted:"2 days ago"},
 ];
 
-let orders = [
+const SAMPLE_ORDERS = [
   {id:"o1", order_number:"ENB-1042", sme:"Kerevat Mill Co.", buyer:"A. Tovut", route:"Delivery — Kokopo Urban",
    agent:null, subtotal:128.00, total:128.00, platform_fee:12.80, agent_fee:0, seller_net:115.20,
    status:"paid", gift:false, created:"Today"},
@@ -613,24 +735,33 @@ let orders = [
    status:"pending_payment", gift:false, created:"Today"},
 ];
 
-let agents = [
+const SAMPLE_AGENTS = [
   {id:"g1", full_name:"A. Palor", district:"Kokopo", location:"Kerevat trade store", rate:5.0, active:true, orders:12},
   {id:"g2", full_name:"B. Tovut", district:"Rabaul", location:"Rabaul market stall 14", rate:5.0, active:true, orders:7},
   {id:"g3", full_name:"C. Vunagi", district:"Pomio", location:"Palmalmal station", rate:7.5, active:false, orders:0},
 ];
 
-let notices = [
+const SAMPLE_NOTICES = [
   {id:"n1", title:"SME listing opens across all four districts", category:"ONBOARDING", published:true, date:"Jul 2026"},
   {id:"n2", title:"Secure card checkout in preparation", category:"PAYMENTS", published:true, date:"Jul 2026"},
   {id:"n3", title:"Meet the SMEs at the bi-annual conference", category:"EVENT", published:false, date:"Draft"},
 ];
 
-let activity = [
+/* working arrays the rest of the panel reads from — sample data
+   until a live sign-in replaces them with real Supabase rows */
+let applications = LIVE ? [] : SAMPLE_APPLICATIONS.slice();
+let smes          = LIVE ? [] : SAMPLE_SMES.slice();
+let listings      = LIVE ? [] : SAMPLE_LISTINGS.slice();
+let orders        = LIVE ? [] : SAMPLE_ORDERS.slice();
+let agents        = LIVE ? [] : SAMPLE_AGENTS.slice();
+let notices       = LIVE ? [] : SAMPLE_NOTICES.slice();
+let activity = LIVE ? [] : [
   {t:"Kokopo Trade Supplies approved and now live", w:"Today, 9:14am", k:"ok"},
   {t:"“Baining Mountain Coffee” returned to seller — photograph too dark", w:"Yesterday, 4:02pm", k:"warn"},
   {t:"Order ENB-1036 flagged as disputed by buyer", w:"3 days ago", k:"bad"},
   {t:"Agent C. Vunagi (Pomio) account created, not yet active", w:"4 days ago", k:"info"},
 ];
+let currentView = 'dash';
 
 /* ============================================================
    HELPERS
@@ -639,6 +770,17 @@ const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&l
 const ind = k => (INDUSTRIES.find(i=>i.key===k)||{}).label || "—";
 const k = n => "K" + Number(n||0).toFixed(2);
 const ph = what => alert("Design preview: this would " + what + ".");
+
+function relTime(iso){
+  if(!iso) return "—";
+  const d = new Date(iso), diff = (Date.now() - d.getTime()) / 1000;
+  if(diff < 60) return "Just now";
+  if(diff < 3600) return Math.floor(diff/60) + " minute" + (Math.floor(diff/60)===1?"":"s") + " ago";
+  if(diff < 86400) return Math.floor(diff/3600) + " hour" + (Math.floor(diff/3600)===1?"":"s") + " ago";
+  if(diff < 172800) return "Yesterday";
+  if(diff < 604800) return Math.floor(diff/86400) + " days ago";
+  return d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
+}
 
 const TITLES = {
   dash:["Overview","What needs the Division's attention today."],
@@ -653,6 +795,7 @@ const TITLES = {
 };
 
 function show(v){
+  currentView = v;
   document.querySelectorAll('.view').forEach(e=>e.style.display='none');
   document.getElementById('v-'+v).style.display='block';
   document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on', b.dataset.v===v));
@@ -674,6 +817,231 @@ function fillSelects(){
   document.getElementById('fAppD').innerHTML = '<option value="">All districts</option>'+d;
   document.getElementById('fSmeD').innerHTML = '<option value="">All districts</option>'+d;
   document.getElementById('fSmeI').innerHTML = '<option value="">All industries</option>'+i;
+}
+
+/* ============================================================
+   AUTH
+   ============================================================ */
+function loginErr(msg){
+  const e = document.getElementById('loginErr');
+  if(!msg){ e.classList.remove('show'); e.textContent=''; return; }
+  e.textContent = msg; e.classList.add('show');
+}
+
+async function signIn(){
+  loginErr('');
+  const email = document.getElementById('l_user').value.trim();
+  const pass  = document.getElementById('l_pass').value;
+  const btn = document.getElementById('loginBtn');
+
+  if(!LIVE){
+    document.getElementById('whoName').textContent = email || 'Division Admin';
+    enterApp();
+    return;
+  }
+
+  if(!email || !pass){ loginErr('Please enter your email and password.'); return; }
+  btn.disabled = true; btn.textContent = 'Signing in…';
+
+  try{
+    const {data, error} = await sb.auth.signInWithPassword({email, password:pass});
+    if(error) throw error;
+
+    const {data:prof, error:e2} = await sb.from('profiles')
+      .select('role, full_name').eq('id', data.user.id).single();
+    if(e2) throw e2;
+
+    if(!prof || !['division_staff','division_admin'].includes(prof.role)){
+      await sb.auth.signOut();
+      loginErr('This account does not have Division access. Contact whoever manages the Supabase project.');
+      btn.disabled = false; btn.textContent = 'Sign in';
+      return;
+    }
+
+    currentUserId = data.user.id;
+    document.getElementById('whoName').textContent = prof.full_name || email;
+    document.getElementById('whoRole').textContent = prof.role;
+    document.getElementById('whoAv').textContent =
+      (prof.full_name||email).split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase() || 'DA';
+
+    btn.textContent = 'Loading…';
+    await loadAll();
+    enterApp();
+
+  }catch(err){
+    loginErr((err && err.message) || 'Could not sign in. Check your details and try again.');
+    btn.disabled = false; btn.textContent = 'Sign in';
+  }
+}
+
+function enterApp(){
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('app').classList.add('on');
+  if(LIVE){
+    document.getElementById('refreshBtn').style.display = '';
+    document.getElementById('demoBanner').innerHTML =
+      '<span style="color:var(--green);">●</span><span><b>Connected to Supabase.</b> ' +
+      'Approvals, publishing and every other action here write to the real database.</span>';
+    document.getElementById('demoBanner').style.background = '#E6F5EC';
+    document.getElementById('demoBanner').style.color = '#0B5228';
+    document.getElementById('demoBanner').style.borderBottomColor = '#A9DCBF';
+  }
+  fillSelects();
+  show('dash');
+}
+
+function signOut(){
+  if(LIVE && sb) sb.auth.signOut();
+  location.reload();
+}
+
+/* ============================================================
+   LOAD LIVE DATA
+   ------------------------------------------------------------
+   Only runs when SUPABASE is configured. Every table here is
+   readable in full by division_staff / division_admin under
+   the RLS policies in db/schema.sql.
+   ============================================================ */
+async function loadAll(){
+  await Promise.all([
+    loadApplications(), loadSmes(), loadListings(),
+    loadOrders(), loadAgents(), loadNotices()
+  ]);
+  // counts that depend on more than one table, computed once everything is in
+  smes.forEach(s => s.products = listings.filter(l => l.smeId === s.id).length);
+  agents.forEach(a => a.orders = orders.filter(o => o.agentId === a.id).length);
+}
+
+async function loadApplications(){
+  const {data, error} = await sb.from('seller_applications')
+    .select('*').order('created_at', {ascending:false});
+  if(error){ console.error('loadApplications', error); return; }
+  applications = (data||[]).map(r => ({
+    id: r.id,
+    business_name: r.business_name,
+    district: r.district,
+    primary_industry: r.primary_industry,
+    contact_name: r.contact_name,
+    phone: r.phone,
+    email: r.email,
+    ipa_status: r.ipa_status,
+    source: r.submitted_from === 'web' ? 'Website' : 'Conference',
+    message: r.message,
+    status: r.status,
+    review_note: r.review_note,
+    reference: r.reference,
+    created: relTime(r.created_at)
+  }));
+}
+
+async function loadListings(){
+  const {data, error} = await sb.from('products')
+    .select('*, smes(registered_name, district), product_images(id)')
+    .order('created_at', {ascending:false});
+  if(error){ console.error('loadListings', error); return; }
+  listings = (data||[]).map(r => ({
+    id: r.id,
+    smeId: r.sme_id,
+    name: r.name,
+    sme: r.smes ? r.smes.registered_name : '—',
+    category: r.category,
+    price: Number(r.price)||0,
+    unit: r.unit,
+    stock: r.stock,
+    status: r.status,
+    photos: (r.product_images||[]).length,
+    description: r.description,
+    review_note: r.review_note,
+    submitted: relTime(r.created_at)
+  }));
+}
+
+async function loadSmes(){
+  const {data, error} = await sb.from('smes').select('*').order('registered_name');
+  if(error){ console.error('loadSmes', error); return; }
+  smes = (data||[]).map(r => ({
+    id: r.id,
+    slug: r.slug,
+    registered_name: r.registered_name,
+    district: r.district,
+    primary_industry: r.primary_industry,
+    contact_name: r.contact_name,
+    phone: r.phone,
+    approved: r.approved,
+    featured: r.featured,
+    consent: r.consent,
+    products: 0 // filled in by loadAll() once listings are known
+  }));
+}
+
+function routeLabel(r){
+  if(r.fulfilment === 'agent_handoff') return 'Agent handoff' + (r.delivery_district?` — ${r.delivery_district}`:'');
+  if(r.fulfilment === 'delivery') return 'Delivery' + (r.delivery_district?` — ${r.delivery_district}`:'') +
+    (r.delivery_address?` (${r.delivery_address})`:'');
+  return 'Collect from SME' + (r.delivery_district?` — ${r.delivery_district}`:'');
+}
+
+async function loadOrders(){
+  const {data, error} = await sb.from('orders')
+    .select('*, smes(registered_name), agents(full_name)')
+    .order('created_at', {ascending:false});
+  if(error){ console.error('loadOrders', error); return; }
+  orders = (data||[]).map(r => ({
+    id: r.id,
+    order_number: r.order_number,
+    sme: r.smes ? r.smes.registered_name : '—',
+    smeId: r.sme_id,
+    agentId: r.agent_id,
+    buyer: r.is_gift
+      ? `${r.buyer_name} → sending to ${r.recipient_name||'recipient'}`
+      : (r.agent_id ? `Via agent — ${r.agents?r.agents.full_name:'—'}` : r.buyer_name),
+    route: routeLabel(r),
+    agent: r.agents ? r.agents.full_name : null,
+    subtotal: Number(r.subtotal)||0,
+    total: Number(r.total)||0,
+    platform_fee: Number(r.platform_fee)||0,
+    agent_fee: Number(r.agent_fee)||0,
+    seller_net: Number(r.seller_net)||0,
+    status: r.status,
+    gift: r.is_gift,
+    created: relTime(r.created_at),
+    note: r.notes
+  }));
+}
+
+async function loadAgents(){
+  const {data, error} = await sb.from('agents').select('*').order('full_name');
+  if(error){ console.error('loadAgents', error); return; }
+  agents = (data||[]).map(r => ({
+    id: r.id,
+    full_name: r.full_name,
+    district: r.district,
+    location: r.location,
+    rate: Number(r.commission_rate)||0,
+    active: r.active,
+    orders: 0 // filled in by loadAll() once orders are known
+  }));
+}
+
+async function loadNotices(){
+  const {data, error} = await sb.from('notices').select('*').order('created_at', {ascending:false});
+  if(error){ console.error('loadNotices', error); return; }
+  notices = (data||[]).map(r => ({
+    id: r.id,
+    title: r.title,
+    category: r.category,
+    published: r.published,
+    date: r.published_at ? relTime(r.published_at) : 'Draft'
+  }));
+}
+
+async function refreshAll(){
+  if(!LIVE) return;
+  const btn = document.getElementById('refreshBtn');
+  if(btn){ btn.disabled = true; btn.textContent = 'Refreshing…'; }
+  await loadAll();
+  show(currentView);
+  if(btn){ btn.disabled = false; btn.textContent = 'Refresh'; }
 }
 
 function badges(){
@@ -758,9 +1126,10 @@ function renderApps(){
     </tr>`).join('') : `<tr><td colspan="7"><div class="empty">No applications match.</div></td></tr>`;
 }
 
-function openApp(id){
+async function openApp(id){
   const a = applications.find(x=>x.id===id); if(!a) return;
   const miss = v => v ? esc(v) : '<span class="v miss">not supplied</span>';
+
   document.getElementById('mTitle').textContent = a.business_name;
   document.getElementById('mBody').innerHTML = `
     <div class="kv"><span class="k">District</span><span class="v">${esc(a.district)}</span></div>
@@ -771,6 +1140,7 @@ function openApp(id){
     <div class="kv"><span class="k">IPA status</span><span class="v">${esc(a.ipa_status)}</span></div>
     <div class="kv"><span class="k">Source</span><span class="v">${esc(a.source)} · ${esc(a.created)}</span></div>
     <div class="kv"><span class="k">Their note</span><span class="v">${miss(a.message)}</span></div>
+    <div id="appDetail">${LIVE ? '<div class="empty" style="padding:20px 0;">Loading their products and photographs…</div>' : ''}</div>
     ${a.ipa_status==='Not registered' ? `<div class="warnbox">
       <b>Not registered with IPA.</b> The Division has not yet decided whether informal businesses may sell.
       Approving this application commits to that position.</div>` : ''}
@@ -780,32 +1150,176 @@ function openApp(id){
       <div class="mact">
         <button class="btn-o" onclick="closeModal()">Close</button>
         <button class="btn" onclick="decideApp('${a.id}',false)">Return to applicant</button>
-        <button class="btn g" onclick="decideApp('${a.id}',true)">Approve &amp; create account</button>
+        <button class="btn g" id="approveBtn" onclick="decideApp('${a.id}',true)">Approve &amp; create account</button>
       </div>`
     : `${a.review_note ? `<div class="kv"><span class="k">Decision note</span><span class="v">${esc(a.review_note)}</span></div>`:''}
        <div class="mact"><button class="btn-o" onclick="closeModal()">Close</button></div>`}
   `;
   openModal();
+  if(LIVE) await loadAppDetail(id);
 }
 
-function decideApp(id, approve){
+/* the submitted products + photographs, fetched only when the
+   Division actually opens an application (not on every list render) */
+async function loadAppDetail(appId){
+  const box = document.getElementById('appDetail');
+  if(!box) return; // modal was closed before this resolved
+
+  const [{data:prods, error:e1}, {data:photos, error:e2}] = await Promise.all([
+    sb.from('application_products').select('*').eq('application_id', appId).order('sort_order'),
+    sb.from('application_photos').select('*').eq('application_id', appId).order('sort_order')
+  ]);
+  if(e1 || e2){ box.innerHTML = '<div class="warnbox">Could not load their products and photographs.</div>'; return; }
+
+  const prodRows = (prods||[]).map(p => `
+    <div class="kv"><span class="k">${esc(p.name)}</span>
+      <span class="v">${p.price!=null?k(p.price):'—'} ${esc(p.unit||'')}${p.stock?' · '+esc(p.stock):''}
+      ${p.description?'<br><span style="color:var(--muted);">'+esc(p.description)+'</span>':''}</span></div>`
+  ).join('') || '<div class="kv"><span class="k">Products</span><span class="v miss">none submitted</span></div>';
+
+  let thumbs = '<div class="kv"><span class="k">Photographs</span><span class="v miss">none submitted</span></div>';
+  if(photos && photos.length){
+    const withUrls = await Promise.all(photos.map(async ph2 => {
+      const {data:signed} = await sb.storage.from(SUPABASE.APPLICATIONS_BUCKET)
+        .createSignedUrl(ph2.storage_path, 600);
+      return {...ph2, url: signed ? signed.signedUrl : null};
+    }));
+    thumbs = `<div class="fr full"><label>Photographs (${photos.length}) — check the tag on each before approving</label>
+      <div class="app-photo-grid">` +
+      withUrls.map(p => `
+        <div class="app-photo">
+          ${p.url ? `<img src="${esc(p.url)}" alt="">` : '<div class="app-photo-broken">could not load</div>'}
+          <select onchange="setPhotoKind('${p.id}', this.value)">
+            <option value="business" ${p.kind==='business'?'selected':''}>Me / my stall</option>
+            <option value="hero" ${p.kind==='hero'?'selected':''}>Front page</option>
+            <option value="product" ${p.kind==='product'?'selected':''}>A product</option>
+          </select>
+        </div>`).join('') +
+      `</div></div>`;
+  }
+
+  box.innerHTML = `<div style="margin:14px 0;">${prodRows}</div>${thumbs}`;
+}
+
+async function setPhotoKind(photoId, kind){
+  const {error} = await sb.from('application_photos').update({kind}).eq('id', photoId);
+  if(error) alert('That could not be saved: ' + error.message);
+}
+
+async function decideApp(id, approve){
   const a = applications.find(x=>x.id===id);
   const note = (document.getElementById('appNote')||{}).value || "";
   if(!approve && !note.trim()){
     alert("Please write a note explaining what the applicant needs to change.");
     return;
   }
-  a.status = approve ? 'approved' : 'rejected';
-  a.review_note = note;
-  if(approve){
-    smes.push({id:"s"+Date.now(), registered_name:a.business_name, district:a.district,
-      primary_industry:a.primary_industry, contact_name:a.contact_name, phone:a.phone,
-      approved:true, featured:false, consent:true, products:0});
-    activity.unshift({t:`${a.business_name} approved and now live`, w:"Just now", k:"ok"});
-  } else {
-    activity.unshift({t:`${a.business_name} returned to applicant`, w:"Just now", k:"warn"});
+
+  if(!LIVE){
+    a.status = approve ? 'approved' : 'rejected';
+    a.review_note = note;
+    if(approve){
+      smes.push({id:"s"+Date.now(), registered_name:a.business_name, district:a.district,
+        primary_industry:a.primary_industry, contact_name:a.contact_name, phone:a.phone,
+        approved:true, featured:false, consent:true, products:0});
+      activity.unshift({t:`${a.business_name} approved and now live`, w:"Just now", k:"ok"});
+    } else {
+      activity.unshift({t:`${a.business_name} returned to applicant`, w:"Just now", k:"warn"});
+    }
+    closeModal(); renderApps(); badges();
+    return;
   }
-  closeModal(); renderApps(); badges();
+
+  if(!approve){
+    const {error} = await sb.from('seller_applications').update({
+      status:'rejected', review_note:note,
+      reviewed_at:new Date().toISOString(), reviewed_by:currentUserId
+    }).eq('id', id);
+    if(error){ alert('Could not save: ' + error.message); return; }
+    a.status = 'rejected'; a.review_note = note;
+    activity.unshift({t:`${a.business_name} returned to applicant`, w:"Just now", k:"warn"});
+    closeModal(); renderApps(); badges();
+    return;
+  }
+
+  const btn = document.getElementById('approveBtn');
+  if(btn){ btn.disabled = true; btn.textContent = 'Approving…'; }
+
+  try{
+    const {data:newSmeId, error:eRpc} = await sb.rpc('approve_application', {app_id:id});
+    if(eRpc) throw eRpc;
+
+    const migrated = await migrateApplicationPhotos(id, newSmeId);
+
+    await loadAll();
+    closeModal();
+    renderApps(); badges();
+    alert(`${a.business_name} approved.` +
+      (migrated.total ? ` ${migrated.ok} of ${migrated.total} photograph(s) moved to the live listing.` +
+        (migrated.fail ? ` ${migrated.fail} could not be moved — see the browser console for details.` : '')
+        : ' No photographs were submitted with this application.'));
+
+  }catch(err){
+    if(btn){ btn.disabled = false; btn.textContent = 'Approve & create account'; }
+    alert('Could not approve this application: ' + (err.message || err));
+  }
+}
+
+/* Moves photographs from the private "applications" bucket into
+   the public "product-photos" bucket, and wires them to the new
+   business/products. Best-effort: one failed photo does not stop
+   the others, and the approval itself has already happened by the
+   time this runs. */
+async function migrateApplicationPhotos(appId, newSmeId){
+  const result = {total:0, ok:0, fail:0};
+
+  const [{data:appProducts}, {data:newProducts}, {data:appPhotos}, {data:smeRow}] = await Promise.all([
+    sb.from('application_products').select('id, name').eq('application_id', appId),
+    sb.from('products').select('id, name').eq('sme_id', newSmeId),
+    sb.from('application_photos').select('*').eq('application_id', appId).order('sort_order'),
+    sb.from('smes').select('slug').eq('id', newSmeId).single().then(r=>r.data ? r : {data:null})
+  ]);
+
+  if(!appPhotos || !appPhotos.length) return result;
+  result.total = appPhotos.length;
+  const slug = (smeRow && smeRow.slug) || newSmeId;
+
+  for(const photo of appPhotos){
+    try{
+      const {data:blob, error:eDl} = await sb.storage
+        .from(SUPABASE.APPLICATIONS_BUCKET).download(photo.storage_path);
+      if(eDl) throw eDl;
+
+      const filename = photo.storage_path.split('/').pop();
+      const destPath = `${slug}/${filename}`;
+
+      const {error:eUp} = await sb.storage.from(SUPABASE.PHOTOS_BUCKET)
+        .upload(destPath, blob, {contentType:'image/jpeg', upsert:true});
+      if(eUp) throw eUp;
+
+      const {data:pub} = sb.storage.from(SUPABASE.PHOTOS_BUCKET).getPublicUrl(destPath);
+      const publicUrl = pub.publicUrl;
+
+      if(photo.kind === 'hero'){
+        await sb.from('smes').update({hero_photo_ref: publicUrl}).eq('id', newSmeId);
+      } else if(photo.kind === 'business'){
+        await sb.from('smes').update({photo_ref: publicUrl}).eq('id', newSmeId);
+      } else if(photo.product_id && appProducts && newProducts){
+        const orig = appProducts.find(p => p.id === photo.product_id);
+        const match = orig && newProducts.find(p => p.name === orig.name);
+        if(match){
+          await sb.from('product_images').insert({
+            product_id: match.id, storage_path: publicUrl,
+            photo_ref: photo.original_name, sort_order: photo.sort_order
+          });
+        }
+      }
+      result.ok++;
+    }catch(err){
+      result.fail++;
+      console.error('Photo migration failed for', photo.storage_path, err);
+    }
+  }
+  return result;
 }
 
 /* ============================================================
@@ -869,13 +1383,24 @@ function openListing(id){
   openModal();
 }
 
-function decideListing(id, publish){
+async function decideListing(id, publish){
   const l = listings.find(x=>x.id===id);
   const note = (document.getElementById('listNote')||{}).value || "";
   if(!publish && !note.trim()){
     alert("Please write a note telling the seller what to change.");
     return;
   }
+
+  if(LIVE){
+    const {error} = await sb.from('products').update({
+      status: publish ? 'live' : 'needs_changes',
+      review_note: note || null,
+      reviewed_at: new Date().toISOString(),
+      reviewed_by: currentUserId
+    }).eq('id', id);
+    if(error){ alert('Could not save: ' + error.message); return; }
+  }
+
   l.status = publish ? 'live' : 'needs_changes';
   l.review_note = note;
   activity.unshift({t: publish ? `“${l.name}” published and now live`
@@ -914,9 +1439,14 @@ function renderSmes(){
       </div></td>
     </tr>`).join('') : `<tr><td colspan="6"><div class="empty">No businesses match.</div></td></tr>`;
 }
-function toggleFeature(id){
+async function toggleFeature(id){
   const s = smes.find(x=>x.id===id);
-  s.featured = !s.featured;
+  const next = !s.featured;
+  if(LIVE){
+    const {error} = await sb.from('smes').update({featured: next}).eq('id', id);
+    if(error){ alert('Could not save: ' + error.message); return; }
+  }
+  s.featured = next;
   activity.unshift({t:`${s.registered_name} ${s.featured?'added to':'removed from'} the homepage slideshow`, w:"Just now", k:"info"});
   renderSmes();
 }
@@ -971,8 +1501,12 @@ function openOrder(id){
     </div>`;
   openModal();
 }
-function resolveDispute(id){
+async function resolveDispute(id){
   const o = orders.find(x=>x.id===id);
+  if(LIVE){
+    const {error} = await sb.from('orders').update({status:'fulfilled'}).eq('id', id);
+    if(error){ alert('Could not save: ' + error.message); return; }
+  }
   o.status='fulfilled'; o.note=null;
   activity.unshift({t:`Dispute on ${o.order_number} marked resolved`, w:"Just now", k:"ok"});
   closeModal(); renderOrders();
@@ -1005,10 +1539,17 @@ function renderNotices(){
       </div></td>
     </tr>`).join('');
 }
-function toggleNotice(id){
+async function toggleNotice(id){
   const n = notices.find(x=>x.id===id);
-  n.published = !n.published;
-  n.date = n.published ? "Just now" : "Draft";
+  const next = !n.published;
+  if(LIVE){
+    const {error} = await sb.from('notices').update({
+      published: next, published_at: next ? new Date().toISOString() : null
+    }).eq('id', id);
+    if(error){ alert('Could not save: ' + error.message); return; }
+  }
+  n.published = next;
+  n.date = next ? "Just now" : "Draft";
   renderNotices();
 }
 
@@ -1099,8 +1640,13 @@ function exportCSV(){
   setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},400);
 }
 
-fillSelects();
-show('dash');
+/* Booting now happens via signIn() → enterApp(), once the
+   Division member has signed in (or immediately, in preview mode
+   with no Supabase configured). See enterApp() above. */
+
+document.getElementById('l_pass').addEventListener('keydown', e=>{
+  if(e.key === 'Enter') signIn();
+});
 </script>
 </body>
 </html>
